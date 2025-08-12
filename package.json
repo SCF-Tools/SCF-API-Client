@@ -1,22 +1,24 @@
 {
-  "name": "scf",
+  "name": "scf-api",
   "version": "1.0.0",
   "description": "An SCF API Client for NodeJS",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "type": "module",
+  "scripts": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SCF-Tools/SCF-API-Client.git"
+    "url": "https://github.com/SCF-Tools/SCF-API-Client.git"
   },
   "keywords": [
-    "scf",
+    "scf"
   ],
   "author": "ARKTD",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/SCF-Tools/SCF-API-Client/issues"
   },
-  "homepage": "https://github.com/SCF-Tools/SCF-API-Client#readme"
+  "homepage": "https://github.com/SCF-Tools/SCF-API-Client#readme",
+  "dependencies": {
+    "axios": "^1.11.0"
+  }
 }
