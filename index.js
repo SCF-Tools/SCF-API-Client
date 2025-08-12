@@ -5,6 +5,7 @@ import { Args } from "./src/utils/utils.js";
 
 // Sections
 import Token from "./src/sections/token.js";
+import Server from "./src/sections/server.js";
 
 export default class SCFAPIClient {
     #provider;
@@ -14,6 +15,7 @@ export default class SCFAPIClient {
     // Sections
     API = {
         token: new Token(this),
+        server: new Server(this),
     };
 
     /**

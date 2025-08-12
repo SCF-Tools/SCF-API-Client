@@ -6,6 +6,7 @@ export default class Token {
      */
 
     #client;
+    #section = "token";
     constructor(client) {
         this.#client = client;
     }
@@ -14,7 +15,7 @@ export default class Token {
      */
     async auth(token) {
         let response = await this.#client.sendAPIRequest(
-            "token",
+            this.#section,
             "auth",
             "POST",
             [
@@ -37,11 +38,11 @@ export default class Token {
      * Issues an SCF Token for the provided SCF ID.
      */
     async issue(owner) {
-        let response = await this.#client.sendAPIRequest("token", "issue", "GET", [
+        let response = await this.#client.sendAPIRequest(this.#section, "issue", "POST", [
             {
                 name: "owner",
                 value: owner,
-                type: Args.GET,
+                type: Args.POST,
             },
         ]);
 
@@ -54,7 +55,7 @@ export default class Token {
      * Returns the information about the used API token.
      */
     async me() {
-        let response = await this.#client.sendAPIRequest("token", "me", "GET", []);
+        let response = await this.#client.sendAPIRequest(this.#section, "me", "GET", []);
 
         return {
             scf_id: response.information.scf_id,
