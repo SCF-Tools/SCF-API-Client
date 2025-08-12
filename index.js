@@ -6,6 +6,8 @@ import { Args } from "./src/utils/utils.js";
 // Sections
 import Token from "./src/sections/token.js";
 import Server from "./src/sections/server.js";
+import Bridgelock from "./src/sections/bridgelock.js";
+import Bridge from "./src/sections/bridge.js";
 
 export default class SCFAPIClient {
     #provider;
@@ -14,8 +16,10 @@ export default class SCFAPIClient {
 
     // Sections
     API = {
-        token: new Token(this),
+        bridge: new Bridge(this),
+        bridgelock: new Bridgelock(this),
         server: new Server(this),
+        token: new Token(this),
     };
 
     /**

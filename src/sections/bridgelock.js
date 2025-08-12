@@ -1,6 +1,6 @@
 import { Args } from "../utils/utils.js";
 
-export default class BridgeLock {
+export default class Bridgelock {
     /**
      * @type {import('../../index').default}
      */
