@@ -19,7 +19,7 @@ export default class Server {
             {
                 name: "uuid",
                 value: uuid,
-                type: Args.GET,
+                type: Args.POST,
             },
             {
                 name: "reason",
@@ -37,7 +37,7 @@ export default class Server {
             {
                 name: "uuid",
                 value: uuid,
-                type: Args.GET,
+                type: Args.POST,
             },
         ]);
     }
@@ -68,12 +68,12 @@ export default class Server {
             {
                 name: "discord_id",
                 value: discord_id,
-                type: Args.GET,
+                type: Args.POST,
             },
             {
                 name: "uuid",
                 value: uuid,
-                type: Args.GET,
+                type: Args.POST,
             },
         ]);
     }
@@ -86,7 +86,7 @@ export default class Server {
             {
                 name: "uuid",
                 value: uuid,
-                type: Args.GET,
+                type: Args.POST,
             },
         ]);
     }
