@@ -7,7 +7,7 @@
   "scripts": {},
   "repository": {
     "type": "git",
-    "url": "https://github.com/SCF-Tools/SCF-API-Client.git"
+    "url": "git+https://github.com/SCF-Tools/SCF-API-Client.git"
   },
   "keywords": [
     "scf"
