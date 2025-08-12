@@ -13,6 +13,8 @@ export default class Bridge {
 
     /**
      * Links a Discord account to a Hypixel account via bridge verification.
+     * @param {string} uuid
+     * @param {string} discord_id
      */
     async link(discord_id, uuid) {
         await this.#client.sendAPIRequest(this.#section, "link", "POST", [
@@ -31,20 +33,27 @@ export default class Bridge {
 
     /**
      * Returns the information about the linked user.
+     * @param {string|null} uuid
+     * @param {string|null} discord_id
      */
     async getLinked(uuid = null, discord_id = null) {
-        let response = await this.#client.sendAPIRequest(this.#section, "getLinked", "GET", [
-            {
+        let args = [];
+        if(uuid){
+            args.push({
                 name: "uuid",
                 value: uuid,
                 type: Args.GET,
-            },
-            {
+            });
+        }
+        if(discord_id){
+            args.push({
                 name: "discord_id",
                 value: discord_id,
                 type: Args.GET,
-            },
-        ]);
+            });
+        }
+
+        let response = await this.#client.sendAPIRequest(this.#section, "getLinked", "GET", args);
 
         return {
             uuid: response.uuid,
@@ -54,6 +63,8 @@ export default class Bridge {
 
     /**
      * Sets the status of the bridge of the token.
+     * @param {string} connected
+     * @param {string} version
      */
     async setStatus(connected, version) {
         await this.#client.sendAPIRequest(this.#section, "setStatus", "POST", [
@@ -72,6 +83,7 @@ export default class Bridge {
 
     /**
      * Returns the status of the bridge of the token.
+     * @param {string} scf_id
      */
     async getStatus(scf_id) {
         let response = await this.#client.sendAPIRequest(this.#section, "getStatus", "GET", [

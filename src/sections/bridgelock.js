@@ -13,6 +13,9 @@ export default class Bridgelock {
 
     /**
      * Locks a user from using Guild Bridges.
+     * @param {string} uuid
+     * @param {string} moderator_id
+     * @param {string} reason
      */
     async add(uuid, moderator_id, reason = "") {
         await this.#client.sendAPIRequest(this.#section, "add", "POST", [
@@ -36,6 +39,7 @@ export default class Bridgelock {
 
     /**
      * Checks if a player is bridge locked.
+     * @param {string} uuid
      */
     async check(uuid) {
         let response = await this.#client.sendAPIRequest(this.#section, "check", "GET", [
@@ -46,19 +50,22 @@ export default class Bridgelock {
             },
         ]);
 
+        console.log(response);
+
         return {
-            locked: response.locked ?? false,
+            locked: response?.data?.locked ?? false,
             info: {
-                lock_id: response.info.lock_id ?? null,
-                moderator_id: response.info.moderator ?? null,
-                reason: response.info.reason ?? null,
-                timestamp: response.info.timestamp ?? null,
+                lock_id: response?.data?.info?.lock_id ?? null,
+                moderator_id: response?.data?.info?.moderator ?? null,
+                reason: response?.data?.info?.reason ?? null,
+                timestamp: response?.data?.info?.timestamp ?? null,
             }
         };
     }
 
     /**
      * Removes the restriction on using the bridges.
+     * @param {string} uuid
      */
     async remove(uuid) {
         await this.#client.sendAPIRequest(this.#section, "remove", "POST", [

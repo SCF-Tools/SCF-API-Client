@@ -13,6 +13,8 @@ export default class Server {
 
     /**
      * Blacklists user from SCF Services.
+     * @param {string} uuid
+     * @param {string|null} reason
      */
     async addBlacklist(uuid, reason = null) {
         await this.#client.sendAPIRequest(this.#section, "addBlacklist", "POST", [
@@ -31,6 +33,7 @@ export default class Server {
 
     /**
      * Removes user's SCF blacklist.
+     * @param {string} uuid
      */
     async removeBlacklist(uuid) {
         await this.#client.sendAPIRequest(this.#section, "removeBlacklist", "POST", [
@@ -44,6 +47,7 @@ export default class Server {
 
     /**
      * Checks if a player is blacklisted from SCF Services.
+     * @param {string} uuid
      */
     async isBlacklisted(uuid) {
         let response = await this.#client.sendAPIRequest(this.#section, "isBlacklisted", "GET", [
@@ -62,6 +66,8 @@ export default class Server {
 
     /**
      * Verifies user in SCF Discord.
+     * @param {string} discord_id
+     * @param {string} uuid
      */
     async verify(discord_id, uuid) {
         await this.#client.sendAPIRequest(this.#section, "verify", "POST", [
@@ -80,6 +86,7 @@ export default class Server {
 
     /**
      * Removes user verification status in SCF Discord.
+     * @param {string} uuid
      */
     async unverify(uuid) {
         await this.#client.sendAPIRequest(this.#section, "unverify", "POST", [
@@ -93,20 +100,27 @@ export default class Server {
 
     /**
      * Returns the information about the linked user.
+     * @param {string|null} discord_id
+     * @param {string|null} uuid
      */
-    async getVerified(uuid = null, discord_id = null) {
-        let response = await this.#client.sendAPIRequest(this.#section, "getVerified", "GET", [
-            {
+    async getVerified(discord_id = null, uuid = null) {
+        let args = [];
+        if(uuid){
+            args.push({
                 name: "uuid",
                 value: uuid,
                 type: Args.GET,
-            },
-            {
+            });
+        }
+        if(discord_id){
+            args.push({
                 name: "discord_id",
                 value: discord_id,
                 type: Args.GET,
-            },
-        ]);
+            });
+        }
+
+        let response = await this.#client.sendAPIRequest(this.#section, "getVerified", "GET", args);
 
         return {
             uuid: response.uuid,
