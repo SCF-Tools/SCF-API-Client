@@ -1,5 +1,4 @@
 import { Args } from "../utils/utils.js";
-import APIError from "../APIError.js";
 
 export default class Token {
     /**
