@@ -16,6 +16,15 @@ jobs:
         with:
           node-version: 22
           registry-url: https://registry.npmjs.org/
-      - run: npm publish --tag dev
+      - name: Release a "dev" tag version
+        if: 'github.event.prerelease'
+        run: npm publish --tag dev
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+      - name: Runs on Release
+        if: '!github.event.prerelease'
+        run: npm publish --tag stable
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+      
+      
