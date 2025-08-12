@@ -1,6 +1,6 @@
 {
   "name": "scf-api",
-  "version": "1.0.0",
+  "version": "1.0.0-alpha-1",
   "description": "An SCF API Client for NodeJS",
   "main": "index.js",
   "type": "module",
