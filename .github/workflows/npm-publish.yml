@@ -9,7 +9,6 @@ on:
 
 jobs:
   publish-npm:
-    environment: Node Publishing
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
