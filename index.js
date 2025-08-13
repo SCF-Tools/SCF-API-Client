@@ -8,6 +8,7 @@ import Token from "./src/sections/token.js";
 import Server from "./src/sections/server.js";
 import Bridgelock from "./src/sections/bridgelock.js";
 import Bridge from "./src/sections/bridge.js";
+import Experimental from "./src/sections/experimental.js";
 
 export default class SCFAPIClient {
     #provider;
@@ -18,6 +19,7 @@ export default class SCFAPIClient {
     API = {
         bridge: new Bridge(this),
         bridgelock: new Bridgelock(this),
+        experimental: new Experimental(this),
         server: new Server(this),
         token: new Token(this),
     };
