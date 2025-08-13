@@ -9,6 +9,7 @@ import Bridgelock from "./src/sections/bridgelock.js";
 import Experimental from "./src/sections/experimental.js";
 import GTW from "./src/sections/gtw.js";
 import Inactive from "./src/sections/inactive.js";
+import Longpoll from "./src/sections/longpoll.js";
 import Server from "./src/sections/server.js";
 import Token from "./src/sections/token.js";
 
@@ -24,6 +25,7 @@ export default class SCFAPIClient {
         experimental: new Experimental(this),
         gtw: new GTW(this),
         inactive: new Inactive(this),
+        longpoll: new Longpoll(this),
         server: new Server(this),
         token: new Token(this),
     };
