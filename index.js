@@ -4,11 +4,12 @@ import axios from "axios";
 import { Args } from "./src/utils/utils.js";
 
 // Sections
-import Token from "./src/sections/token.js";
-import Server from "./src/sections/server.js";
-import Bridgelock from "./src/sections/bridgelock.js";
 import Bridge from "./src/sections/bridge.js";
+import Bridgelock from "./src/sections/bridgelock.js";
 import Experimental from "./src/sections/experimental.js";
+import GTW from "./src/sections/gtw.js";
+import Server from "./src/sections/server.js";
+import Token from "./src/sections/token.js";
 
 export default class SCFAPIClient {
     #provider;
@@ -20,6 +21,7 @@ export default class SCFAPIClient {
         bridge: new Bridge(this),
         bridgelock: new Bridgelock(this),
         experimental: new Experimental(this),
+        gtw: new GTW(this),
         server: new Server(this),
         token: new Token(this),
     };
