@@ -8,6 +8,7 @@ import Bridge from "./src/sections/bridge.js";
 import Bridgelock from "./src/sections/bridgelock.js";
 import Experimental from "./src/sections/experimental.js";
 import GTW from "./src/sections/gtw.js";
+import Inactive from "./src/sections/inactive.js";
 import Server from "./src/sections/server.js";
 import Token from "./src/sections/token.js";
 
@@ -22,6 +23,7 @@ export default class SCFAPIClient {
         bridgelock: new Bridgelock(this),
         experimental: new Experimental(this),
         gtw: new GTW(this),
+        inactive: new Inactive(this),
         server: new Server(this),
         token: new Token(this),
     };
