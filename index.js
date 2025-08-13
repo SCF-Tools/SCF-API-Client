@@ -10,6 +10,7 @@ import Experimental from "./src/sections/experimental.js";
 import GTW from "./src/sections/gtw.js";
 import Inactive from "./src/sections/inactive.js";
 import Longpoll from "./src/sections/longpoll.js";
+import Minigames from "./src/sections/minigames.js";
 import Server from "./src/sections/server.js";
 import Token from "./src/sections/token.js";
 
@@ -26,6 +27,7 @@ export default class SCFAPIClient {
         gtw: new GTW(this),
         inactive: new Inactive(this),
         longpoll: new Longpoll(this),
+        minigames: new Minigames(this),
         server: new Server(this),
         token: new Token(this),
     };

@@ -14,8 +14,8 @@ export default class Inactive {
 
     /**
      * Adds a player to the inactive list.
-     * @param {string} uuid - The UUID of the player.
-     * @param {number} days - Number of days for the inactive period.
+     * @param {string} uuid
+     * @param {number} days
      */
     async add(uuid, days) {
         let response = await this.#client.sendAPIRequest(this.#section, "add", "POST", [
@@ -38,7 +38,7 @@ export default class Inactive {
 
     /**
      * Removes a player from the inactive list.
-     * @param {string} uuid - The UUID of the player.
+     * @param {string} uuid
      */
     async remove(uuid) {
         await this.#client.sendAPIRequest(this.#section, "remove", "POST", [
@@ -52,7 +52,7 @@ export default class Inactive {
 
     /**
      * Checks if a player is on the inactive list.
-     * @param {string} uuid - The UUID of the player.
+     * @param {string} uuid
      */
     async check(uuid) {
         let response = await this.#client.sendAPIRequest(this.#section, "check", "GET", [

@@ -40,7 +40,7 @@ export default class Longpoll {
 
     /**
      * Removes a longpoll request.
-     * @param {string|number} request_id - The ID of the longpoll request.
+     * @param {string|number} request_id
      */
     async remove(request_id) {
         await this.#client.sendAPIRequest(this.#section, "remove", "POST", [

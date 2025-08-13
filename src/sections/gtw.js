@@ -14,7 +14,7 @@ export default class GTW {
 
     /**
      * Generates hints for a provided word.
-     * @param {string} word - The word to generate hints for.
+     * @param {string} word
      */
     async start(word) {
         let response = await this.#client.sendAPIRequest(this.#section, "start", "GET", [
@@ -33,16 +33,16 @@ export default class GTW {
 
     /**
      * @typedef {Object} PlayerEntry
-     * @property {string} discord_id - The Discord ID of the player.
-     * @property {number} total - The total score or rounds.
+     * @property {string} discord_id
+     * @property {number} total
 
      * @typedef {Object} Leaderboard
-     * @property {PlayerEntry[]} weekly - Weekly leaderboard entries.
-     * @property {PlayerEntry[]} overall - Overall leaderboard entries.
+     * @property {PlayerEntry[]} weekly
+     * @property {PlayerEntry[]} overall
 
      * @typedef {Object} GetTopResponse
-     * @property {Leaderboard} score - Score leaderboard.
-     * @property {Leaderboard} rounds - Rounds leaderboard.
+     * @property {Leaderboard} score
+     * @property {Leaderboard} rounds
      * 
      * Returns Guess The Word leaderboards.
      * @returns {Promise<GetTopResponse>}
@@ -64,8 +64,8 @@ export default class GTW {
 
     /**
      * Awards points for Guess The Word minigame.
-     * @param {string} discord_id - The Discord ID of the winner.
-     * @param {number} points - The amount of points to award.
+     * @param {string} discord_id
+     * @param {number} points
      */
     async awardPoints(discord_id, points) {
         let response = await this.#client.sendAPIRequest(this.#section, "awardPoints", "POST", [
