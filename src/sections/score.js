@@ -13,12 +13,12 @@ export default class Score {
     }
 
     /**
-     * @typedef {Object} PlaceEntry
+     * @typedef {Object} ScorePlaceEntry
      * @property {number} place
      * @property {number} score
      * @property {string} nick
      *
-     * @typedef {Object} PlayerEntry
+     * @typedef {Object} PlayerScore
      * @property {string} uuid
      * @property {number} score
      * @property {string} nick
@@ -28,7 +28,7 @@ export default class Score {
      * Returns the score and the place of a user in the guild of the token this week.
      * @param {string} uuid
      * @param {boolean} overall
-     * @returns {Promise<PlaceEntry>}
+     * @returns {Promise<ScorePlaceEntry>}
      */
     async getCutoff(uuid, overall = false) {
         let response = await this.#client.sendAPIRequest(this.#section, "getCutoff", "GET", [
@@ -55,7 +55,7 @@ export default class Score {
      * Returns the score and the place of a user in the guild of the token in the past 7 days.
      * @param {string} uuid
      * @param {boolean} overall
-     * @returns {Promise<PlaceEntry>}
+     * @returns {Promise<ScorePlaceEntry>}
      */
     async getRolling(uuid, overall = false) {
         let response = await this.#client.sendAPIRequest(this.#section, "getRolling", "GET", [
@@ -107,7 +107,7 @@ export default class Score {
     /**
      * Returns the top players in a guild based on their score.
      * @param {string|null} guild_id
-     * @returns {Promise<{total: number, list: PlayerEntry[]}>}
+     * @returns {Promise<{total: number, list: PlayerScore[]}>}
      */
     async getTop(guild_id = null) {
         let args = [];

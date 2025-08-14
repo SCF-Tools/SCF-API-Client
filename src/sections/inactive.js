@@ -71,13 +71,13 @@ export default class Inactive {
     }
 
     /**
-     * @typedef {Object} PlayerEntry
+     * @typedef {Object} InactivePlayer
      * @property {string} uuid
      * @property {number} requested
      * @property {number} expired
      * 
      * Returns the list of all inactive players.
-     * @returns {Promise<PlayerEntry[]>}
+     * @returns {Promise<InactivePlayer[]>}
      */
     async list() {
         let response = await this.#client.sendAPIRequest(this.#section, "list", "GET", []);

@@ -32,20 +32,20 @@ export default class GTW {
     }
 
     /**
-     * @typedef {Object} PlayerEntry
+     * @typedef {Object} GTWPlayer
      * @property {string} discord_id
      * @property {number} total
 
-     * @typedef {Object} Leaderboard
-     * @property {PlayerEntry[]} weekly
-     * @property {PlayerEntry[]} overall
+     * @typedef {Object} GTWLeaderboard
+     * @property {GTWPlayer[]} weekly
+     * @property {GTWPlayer[]} overall
 
-     * @typedef {Object} GetTopResponse
-     * @property {Leaderboard} score
-     * @property {Leaderboard} rounds
+     * @typedef {Object} GTWTop
+     * @property {GTWLeaderboard} score
+     * @property {GTWLeaderboard} rounds
      * 
      * Returns Guess The Word leaderboards.
-     * @returns {Promise<GetTopResponse>}
+     * @returns {Promise<GTWTop>}
      */
     async getTop() {
         let response = await this.#client.sendAPIRequest(this.#section, "getTop", "GET", []);

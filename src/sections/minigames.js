@@ -111,24 +111,24 @@ export default class Minigames {
     }
 
     /**
-     * @typedef {Object} Coins
+     * @typedef {Object} MinigameCoins
      * @property {number} purse
      * @property {number} bank
      * @property {number} total
      * 
-     * @typedef {Object} Cooldowns
+     * @typedef {Object} MinigameCooldowns
      * @property {string} work
      * @property {string} crime
      * @property {string} beg
      * @property {string} social
      *
-     * @typedef {Object} PlayerEntry
+     * @typedef {Object} MinigamePlayer
      * @property {string} discord_id
-     * @property {Coins} coins
-     * @property {Cooldowns} cooldowns
+     * @property {MinigameCoins} coins
+     * @property {MinigameCooldowns} cooldowns
      * 
      * Returns top 10 minigame players, sorted by networth.
-     * @returns {Promise<PlayerEntry[]>}
+     * @returns {Promise<MinigamePlayer[]>}
      */
     async getTop() {
         let response = await this.#client.sendAPIRequest(this.#section, "getTop", "GET", []);
@@ -140,7 +140,7 @@ export default class Minigames {
      * 
      * Returns the minigame profile for a Discord ID.
      * @param {string} discord_id
-     * @returns {Promise<PlayerEntry>}
+     * @returns {Promise<MinigamePlayer>}
      */
     async getProfile(discord_id) {
         let response = await this.#client.sendAPIRequest(this.#section, "getProfile", "GET", [
