@@ -17,7 +17,7 @@ jobs:
           node-version: 22
           registry-url: https://registry.npmjs.org/
       - name: Build package.
-        run: npm build
+        run: npm run build
       - name: Release a "dev" tag version.
         if: 'github.event.release.prerelease'
         run: npm publish --tag dev
