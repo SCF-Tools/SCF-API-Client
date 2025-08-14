@@ -14,6 +14,7 @@ import Minigames from "./src/sections/minigames.js";
 import Score from "./src/sections/score.js";
 import Server from "./src/sections/server.js";
 import Staff from "./src/sections/staff.js";
+import Stats from "./src/sections/stats.js";
 import Token from "./src/sections/token.js";
 
 export default class SCFAPIClient {
@@ -33,6 +34,7 @@ export default class SCFAPIClient {
         score: new Score(this),
         server: new Server(this),
         staff: new Staff(this),
+        stats: new Stats(this),
         token: new Token(this),
     };
 
