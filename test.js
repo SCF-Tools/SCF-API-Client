@@ -108,6 +108,8 @@ if (passed != tests.length) {
             tests.length - passed
         } tests failed.\x1b[0m`
     );
+
+    throw "Some tests were failed."
 } else {
     console.log(
         `\x1b[42m Tests Passed \x1b[0m\x1b[32m ${passed} / ${tests.length} (${percent_passed}%) tests passed.\x1b[0m`

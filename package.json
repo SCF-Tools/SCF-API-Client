@@ -4,7 +4,9 @@
   "description": "An SCF API Client for NodeJS",
   "main": "index.js",
   "type": "module",
-  "scripts": {},
+  "scripts": {
+    "test": "node test.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SCF-Tools/SCF-API-Client.git"
