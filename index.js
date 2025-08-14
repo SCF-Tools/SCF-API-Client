@@ -21,6 +21,8 @@ export default class SCFAPIClient {
     #provider;
     #discord_token;
     #scf_token;
+    #test_mode = false;
+    #test_function;
 
     // Sections
     API = {
@@ -86,6 +88,14 @@ export default class SCFAPIClient {
             config.headers["Authorization"] = `Bearer ${token}`;
         }
 
+        if(this.#test_mode){
+            config.params = Object.fromEntries(provider.searchParams);
+            if(this.#test_function){
+                this.#test_function(config);
+            }
+            return;
+        }
+
         let response;
 
         try {
@@ -137,5 +147,10 @@ export default class SCFAPIClient {
                 console.log(e);
             }
         }
+    }
+
+    testMode(callback) {
+        this.#test_mode = true;
+        this.#test_function = callback;
     }
 }
