@@ -21,8 +21,8 @@ export default class SCFAPIClient {
     #provider;
     #discord_token;
     #scf_token;
-    #test_mode = false;
-    #test_function;
+
+    #features = {};
 
     // Sections
     API = {
@@ -60,70 +60,75 @@ export default class SCFAPIClient {
     }
 
     async sendAPIRequest(section, method, http_method, params, auth = true) {
-        const provider = new URL(this.#provider);
-        provider.searchParams.append("method", `${section}.${method}`);
-
-        let config = {
-            method: http_method,
-            headers: {
-                "User-Agent": "SCF-API-Client",
-                "Content-Type": "application/json",
-            },
-        };
-
-        for (const param of params) {
-            if (param.type == Args.GET) {
-                provider.searchParams.append(param.name, param.value);
-            }
-            if (param.type == Args.POST) {
-                if (!config.data) config.data = {};
-                config.data[param.name] = param.value;
-            }
-        }
-
-        config.url = provider.href;
-
-        if (auth) {
-            let token = await this.getToken();
-            config.headers["Authorization"] = `Bearer ${token}`;
-        }
-
-        if(this.#test_mode){
-            config.params = Object.fromEntries(provider.searchParams);
-            if(this.#test_function){
-                this.#test_function(config);
-            }
-            return;
-        }
-
-        let response;
-
         try {
-            response = await axios(config);
-        } catch (error) {
-            throw new APIError("Failed to send API request.", {
-                type: "request_failed",
-                axios: error,
-            });
+            const provider = new URL(this.#provider);
+            provider.searchParams.append("method", `${section}.${method}`);
+
+            let config = {
+                method: http_method,
+                headers: {
+                    "User-Agent": "SCF-API-Client",
+                    "Content-Type": "application/json",
+                },
+            };
+
+            for (const param of params) {
+                if (param.type == Args.GET) {
+                    provider.searchParams.append(param.name, param.value);
+                }
+                if (param.type == Args.POST) {
+                    if (!config.data) config.data = {};
+                    config.data[param.name] = param.value;
+                }
+            }
+
+            config.url = provider.href;
+
+            if (auth) {
+                let token = await this.getToken();
+                config.headers["Authorization"] = `Bearer ${token}`;
+            }
+
+            if (this.#features.test) {
+                config.params = Object.fromEntries(provider.searchParams);
+                this.#features.test(config);
+                return;
+            }
+
+            let response;
+
+            try {
+                response = await axios(config);
+            } catch (error) {
+                throw new APIError("Failed to send API request.", {
+                    type: "request_failed",
+                    axios: error,
+                });
+            }
+
+            if (!response?.data) {
+                throw new APIError("API has returned no data.", {
+                    type: "request_failed",
+                    axios: response,
+                });
+            }
+
+            let data = response.data;
+
+            if (data.code && !data.success) {
+                throw new APIError(data.message, {
+                    type: data.code,
+                    axios: response,
+                });
+            }
+
+            return data;
+        } catch (e) {
+            if ((e instanceof APIError) && this.#features.error) {
+                this.#features.error(e);
+            }
+            throw e;
         }
-
-        if (!response?.data) {
-            throw new APIError("API has returned no data.", {
-                type: "request_failed",
-                axios: response,
-            });
-        }
-
-        let data = response.data;
-
-        if (data.code && !data.success) {
-            throw new APIError(data.message, {
-                type: data.code,
-                axios: response,
-            });
-        }
-
-        return data;
     }
 
     async getToken() {
@@ -139,18 +144,21 @@ export default class SCFAPIClient {
             throw new APIError("Discord Token is required to authorize.");
         }
 
-        try{
+        try {
             let response = await this.API.token.auth(this.#discord_token);
             this.#scf_token = response.token;
-        }catch(e){
-            if(e?.type == "APIError"){
+        } catch (e) {
+            if (e?.type == "APIError") {
                 console.log(e);
             }
         }
     }
 
     testMode(callback) {
-        this.#test_mode = true;
-        this.#test_function = callback;
+        this.#features.test = callback;
+    }
+
+    errorHandler(callback){
+        this.#features.error = callback;
     }
 }

@@ -50,8 +50,6 @@ export default class Bridgelock {
             },
         ]);
 
-        console.log(response);
-
         return {
             locked: response?.data?.locked ?? false,
             info: {
