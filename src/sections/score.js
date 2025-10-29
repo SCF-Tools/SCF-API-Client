@@ -107,6 +107,7 @@ export default class Score {
     /**
      * Returns the top players in a guild based on their score.
      * @param {string|null} guild_id
+     * @param {number} offset
      * @returns {Promise<{total: number, list: PlayerScore[]}>}
      */
     async getTop(guild_id = null, offset = 0) {
