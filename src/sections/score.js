@@ -109,7 +109,7 @@ export default class Score {
      * @param {string|null} guild_id
      * @returns {Promise<{total: number, list: PlayerScore[]}>}
      */
-    async getTop(guild_id = null) {
+    async getTop(guild_id = null, offset = 0) {
         let args = [];
         if (guild_id) {
             args.push({
@@ -118,6 +118,15 @@ export default class Score {
                 type: Args.GET,
             });
         }
+        
+        if (offset) {
+            args.push({
+                name: "offset",
+                value: offset,
+                type: Args.GET,
+            });
+        }
+
         let response = await this.#client.sendAPIRequest(this.#section, "getTop", "GET", args);
 
         return {
