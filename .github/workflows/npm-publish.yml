@@ -25,12 +25,8 @@ jobs:
       - name: Release a "dev" tag version.
         if: 'github.event.release.prerelease'
         run: npm publish --tag dev
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
       - name: Release a "stable" tag version.
         if: '!github.event.release.prerelease'
         run: npm publish --tag latest
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
       
       
