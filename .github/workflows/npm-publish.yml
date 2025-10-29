@@ -3,22 +3,21 @@
 
 name: Node.js Package
 
-permissions:
-  id-token: write
-  contents: read
-
 on:
   release:
     types: [created]
 
 jobs:
   publish-npm:
+    permissions:
+      id-token: write
+      contents: read
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
-          node-version: 22
+          node-version: 24
           registry-url: https://registry.npmjs.org/
       - name: Build package.
         run: npm run build
