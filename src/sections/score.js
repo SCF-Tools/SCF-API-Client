@@ -28,9 +28,10 @@ export default class Score {
      * Returns the score and the place of a user in the guild of the token this week.
      * @param {string} uuid
      * @param {boolean} overall
+     * @param {number} offset
      * @returns {Promise<ScorePlaceEntry>}
      */
-    async getCutoff(uuid, overall = false) {
+    async getCutoff(uuid, overall = false, offset = 0) {
         let response = await this.#client.sendAPIRequest(this.#section, "getCutoff", "GET", [
             {
                 name: "uuid",
@@ -40,6 +41,11 @@ export default class Score {
             {
                 name: "overall",
                 value: overall ? 1 : 0,
+                type: Args.GET,
+            },
+            {
+                name: "offset",
+                value: offset,
                 type: Args.GET,
             },
         ]);
