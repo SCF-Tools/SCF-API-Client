@@ -12,6 +12,7 @@ import Inactive from "./src/sections/inactive.js";
 import Longpoll from "./src/sections/longpoll.js";
 import Minigames from "./src/sections/minigames.js";
 import Score from "./src/sections/score.js";
+import Security from "./src/sections/security.js";
 import Server from "./src/sections/server.js";
 import Services from "./src/sections/services.js";
 import Staff from "./src/sections/staff.js";
@@ -35,6 +36,7 @@ export default class SCFAPIClient {
         longpoll: new Longpoll(this),
         minigames: new Minigames(this),
         score: new Score(this),
+        security: new Security(this),
         server: new Server(this),
         services: new Services(this),
         staff: new Staff(this),
