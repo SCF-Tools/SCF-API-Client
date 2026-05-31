@@ -12,10 +12,23 @@ export default class Security {
     }
 
     /**
+     * @typedef {Object} HeatAction
+     * @property {number} id The ID of the action.
+     * @property {string} type The reason for the action.
+     * @property {number} heat The initial amount of heat applied.
+     * @property {number} timestamp The timestamp of the action.
+     * 
+     * @typedef {Object} HeatData
+     * @property {number} heat The current total heat of the user.
+     * @property {HeatAction[]} actions The list of active actions.
+     */
+
+    /**
      * Adds heat to a user.
      * @param {string} id The Discord ID of the user.
      * @param {number|string} heat The amount of heat to add.
      * @param {string} type The reason why the heat was added.
+     * @returns {Promise<HeatData>} An object containing the user's current heat and active actions.
      */
     async addHeat(id, heat, type) {
         let response = await this.#client.sendAPIRequest(this.#section, "addHeat", "POST", [
@@ -36,20 +49,13 @@ export default class Security {
             },
         ]);
 
-        return response.heat;
+        return {
+            heat: response.heat,
+            actions: response.actions,
+        }
     }
 
     /**
-     * @typedef {Object} HeatAction
-     * @property {number} id The ID of the action.
-     * @property {string} type The reason for the action.
-     * @property {number} heat The initial amount of heat applied.
-     * @property {number} timestamp The timestamp of the action.
-     * 
-     * @typedef {Object} HeatData
-     * @property {number} heat The current total heat of the user.
-     * @property {HeatAction[]} actions The list of active actions.
-     * 
      * Returns user's heat level.
      * @param {string} id Discord ID of the user.
      * @returns {Promise<HeatData>} An object containing the user's current heat and active actions.
