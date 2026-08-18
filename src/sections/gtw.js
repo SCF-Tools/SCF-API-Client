@@ -32,6 +32,15 @@ export default class GTW {
     }
 
     /**
+     * Generates a random word.
+     */
+    async createWord() {
+        let response = await this.#client.sendAPIRequest(this.#section, "createWord", "GET", []);
+
+        return response.word;
+    }
+
+    /**
      * @typedef {Object} GTWPlayer
      * @property {string} discord_id
      * @property {number} total
